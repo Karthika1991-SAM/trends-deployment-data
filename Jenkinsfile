@@ -5,15 +5,8 @@ pipeline {
         DOCKER_IMAGE = "karthikarajendran19/trend-data"
     }
 
-    stages {
-        stage('Checkout') {
-            steps { 
-                // Use credentialsId if the repo is private
-                git url: 'https://github.com/Karthika1991-SAM/trends-deployment-data.git', credentialsId: 'github-credentials' 
-            }
-        }
-
-        stage('Build Image') {
+   
+       stage('Build Image') {
             steps { 
                 sh 'docker build -t $DOCKER_IMAGE:latest .' 
             }
@@ -35,3 +28,4 @@ pipeline {
         }
     }
 }
+
