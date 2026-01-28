@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "karthikarajendran19/trend-data"    }
-    stages {    
+    stages  {    
         stage('Build Image') {
             steps { 
                 sh 'docker build -t $DOCKER_IMAGE:latest .' 
@@ -12,7 +12,7 @@ pipeline {
 
         stage('Push Image') {
             steps {
-                withDockerRegistry([credentialsId: 'dockerhub-credentials', url: '']) {
+                withDockerRegistry([credentialsId: 'docker-hub-credentials', url: '']) {
                     sh 'docker push $DOCKER_IMAGE:latest'
                 }
             }
