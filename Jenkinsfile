@@ -3,8 +3,8 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "karthikarajendran19/trend-data"    }
-        
-     stage('Build Image') {
+    stages {    
+        stage('Build Image') {
             steps { 
                 sh 'docker build -t $DOCKER_IMAGE:latest .' 
             }
@@ -25,5 +25,6 @@ pipeline {
             }
         }
     }
+}
 
 
