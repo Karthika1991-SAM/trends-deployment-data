@@ -2,8 +2,12 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "karthikarajendran19/trend-data"    }
-    stages  {    
+        DOCKER_IMAGE = "karthikarajendran19/trend-data"
+        AWS_REGION = "ap-south-1"        // replace with your region
+        EKS_CLUSTER = "trend-data-eks-cluster"    // replace with your EKS cluster name
+    }
+
+    stages {    
         stage('Build Image') {
             steps { 
                 sh 'docker build -t $DOCKER_IMAGE:latest .' 
@@ -20,12 +24,20 @@ pipeline {
 
         stage('Deploy to EKS') {
             steps {
-                // Make sure kubectl is configured and kubeconfig is set
-                  sh 'kubectl apply -f deployment.yaml'
-                 sh 'kubectl apply -f service.yaml'
+                withCredentials([[
+                    $class: 'AmazonWebServicesCredentialsBinding',
+                    credentialsId: 'aws-eks-credentials'   // your AWS IAM credentials in Jenkins
+                ]]) {
+                    sh '''
+                        # Configure kubectl with AWS EKS
+                        aws eks update-kubeconfig --name $EKS_CLUSTER --region $AWS_REGION
+
+                        # Deploy to EKS
+                        kubectl apply -f deployment.yaml
+                        kubectl apply -f service.yaml
+                    '''
+                }
             }
         }
     }
 }
-
-
