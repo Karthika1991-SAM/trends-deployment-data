@@ -1,0 +1,24 @@
+{
+  "name": "trend",
+  "version": "1.0.0",
+  "description": "application deployment",
+  "homepage": "https://github.com/Vennilavan12/Trend#readme",
+  "bugs": {
+    "url": "https://github.com/Vennilavan12/Trend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vennilavan12/Trend.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+   "scripts": {
+     "build": "test -d dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "vite": "^7.3.1"
+  }
+}
