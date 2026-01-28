@@ -21,7 +21,8 @@ pipeline {
         stage('Deploy to EKS') {
             steps {
                 // Make sure kubectl is configured and kubeconfig is set
-                sh 'kubectl apply -f k8s/'
+                  sh 'kubectl apply -f deployment.yaml'
+                 sh 'kubectl apply -f service.yaml'
             }
         }
     }
