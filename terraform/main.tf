@@ -206,5 +206,19 @@ module "eks" {
     Environment = "Production"
     Terraform   = "true"
   }
+    access_entries = {
+    karthika = {
+      principal_arn = "arn:aws:iam::613032729380:user/karthika"
+      policy_associations = {
+        admin = {
+          policy_arn = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+          access_scope = {
+            type = "cluster"
+          }
+        }
+      }
+    }
+    }
 }
+
 
