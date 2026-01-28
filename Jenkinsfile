@@ -2,11 +2,9 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "karthikarajendran19/trend-data"
-    }
-
-   
-       stage('Build Image') {
+        DOCKER_IMAGE = "karthikarajendran19/trend-data"    }
+        
+     stage('Build Image') {
             steps { 
                 sh 'docker build -t $DOCKER_IMAGE:latest .' 
             }
@@ -27,5 +25,5 @@ pipeline {
             }
         }
     }
-}
+
 
